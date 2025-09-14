@@ -65,7 +65,6 @@
     wget
     rsync
     openssh
-    tailscale
     fastfetch
 
     # Development tools
@@ -98,7 +97,7 @@
     usbutils
     pciutils
   ];
-  services.tailscale.enable = true;
+
   # Configure git (essential for development)
   
   programs.keychain = {
