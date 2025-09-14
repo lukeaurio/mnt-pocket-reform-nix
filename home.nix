@@ -76,9 +76,9 @@
     lazygit
     tealdeer
 
-    #tuis
-    jellyfin-tui
-    ncspot
+    # TUI
+    jellyfin-tui            
+    reddit-tui
 
     # System monitoring
     iotop
@@ -98,7 +98,7 @@
     usbutils
     pciutils
   ];
-
+  services.tailscale.enable = true;
   # Configure git (essential for development)
   
   programs.keychain = {
