@@ -1,0 +1,50 @@
+# Example user customization file
+# Copy this file to customize your configuration
+
+{
+  # User-specific settings
+  user = {
+    name = "your-username";
+    email = "your-email@example.com";
+    fullName = "Your Full Name";
+  };
+
+  # Additional packages you might want
+  extraPackages = [
+    # Development tools
+    # "nodejs"
+    # "python3"
+    # "rustc"
+    # "go"
+    
+    # Media tools
+    # "ffmpeg"
+    # "imagemagick"
+    
+    # GUI applications (if running with a desktop environment)
+    # "firefox"
+    # "alacritty"
+    # "vscode"
+  ];
+
+  # Stylix customization
+  theme = {
+    # Uncomment to use a custom base16 color scheme
+    # colorScheme = "tomorrow-night";
+    
+    # Uncomment to set a custom wallpaper
+    # wallpaper = "/path/to/your/wallpaper.jpg";
+  };
+
+  # Shell preferences
+  shell = {
+    # Set your preferred shell: "bash", "zsh", "fish"
+    default = "bash";
+    
+    # Additional shell aliases
+    aliases = {
+      # "ll" = "ls -la";
+      # "cls" = "clear";
+    };
+  };
+}
