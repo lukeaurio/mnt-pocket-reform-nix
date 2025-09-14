@@ -76,6 +76,10 @@
     lazygit
     tealdeer
 
+    #tuis
+    jellyfin-tui
+    ncspot
+
     # System monitoring
     iotop
     nmon
@@ -230,14 +234,26 @@
   programs.nvf = {
     enable = true;
     enableManpages = true;
-    # your settings need to go into the settings attribute set
+    # Your settings need to go into the settings attribute set
     # most settings are documented in the appendix
     settings = {
-      vim.viAlias = false;
-      vim.vimAlias = true;
-      vim.lsp = {
-        enable = true;
-      };
+       vim = {
+          languages = { 
+             nix.enable = true;
+             python.enable = true;
+             rust.enable = true;
+             enableLSP = true;
+             enableTreesitter = true;
+          };
+          viAlias = false;
+          vimAlias = true;
+          lsp = {
+             enable = true;
+          };
+          statusline.lualine.enable = true;
+          telescope.enable = true;
+          autocomplete.nvim-cmp.enable = true;
+       }; 
     };
   };
 

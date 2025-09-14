@@ -5,7 +5,7 @@
 
   # Flake inputs
   inputs = {
-    flake-schemas.url = "https://flakehub.com/f/DeterminateSystems/flake-schemas/*";
+    #flake-schemas.url = "https://flakehub.com/f/DeterminateSystems/flake-schemas/*";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixgl = {
@@ -32,7 +32,14 @@
   };
 
   # Flake outputs that other flakes can use
-  outputs = { self, flake-schemas, nixpkgs, nixgl, home-manager, nvf, stylix, ... }@inputs:
+  outputs = { 
+        self, 
+        #flake-schemas, 
+        nixpkgs, 
+        nixgl, 
+        home-manager, 
+        nvf, 
+        stylix, ... }@inputs:
     let
       # Helpers for producing system-specific outputs
       supportedSystems = [ "aarch64-linux" ];
@@ -46,7 +53,7 @@
       });
     in {
       # Schemas tell Nix about the structure of your flake's outputs
-      schemas = flake-schemas.schemas;
+      #schemas = flake-schemas.schemas;
 
       # Home Manager configuration
       homeConfigurations = {
