@@ -128,60 +128,64 @@
      enable = true;
      enableZshIntegration = true;
      settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (''
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
     {
-      "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-      "blocks": [
+      "alignment": "left",
+      "segments": [
         {
-          "alignment": "left",
-          "segments": [
-            {
-              "background": "#18354c",
-              "foreground": "#ffc107",
-              "leading_diamond": "\ue0b6",
-              "properties": {
-                "style": "fish",
-                "full_length_dirs": 1,
-                "dir_legth": 3
-              },
-              "style": "diamond",
-              "template": " \ue5ff {{ .Path }} ",
-              "trailing_diamond": "\ue0b0",
-              "type": "path"
-            },
-            {
-              "background": "#18354c",
-              "foreground": "#ffc107",
-              "powerline_symbol": "\ue0b0",
-              "properties": {
-                "fetch_upstream_icon": true
-              },
-              "style": "powerline",
-              "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
-              "type": "git"
-            },
-            {
-              "background": "#ffc107",
-              "foreground": "#18354c",
-              "powerline_symbol": "\ue0b0",
-              "style": "powerline",
-              "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
-              "type": "python"
-            },
-            {
-              "background": "#ffc107",
-              "foreground": "#18354c",
-              "powerline_symbol": "\ue0b0",
-              "style": "powerline",
-              "template": " \uf0e7 ",
-              "type": "root"
-            }
-          ],
-          "type": "prompt"
+          "foreground": "#ffdd86",
+          "style": "plain",
+          "template": "{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }} {{ end }}",
+          "type": "session"
+        },
+        {
+          "foreground": "#42a9ff",
+          "style": "plain",
+          "properties": {
+             "style": "fish",
+             "full_length_dirs": 1,
+             "dir_legth": 3
+          },
+          "template": "{{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "properties": {
+            "branch_icon": "",
+            "fetch_status": true
+          },
+          "style": "plain",
+          "template": "git:{{ if or (.Working.Changed) (.Staging.Changed) (gt .StashCount 0) }}<#ffdd86>{{ .HEAD }}</>{{ else }}{{ .HEAD }}{{ end }}{{ if .Staging.Changed }} <#98c379>{{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }} <#d16971>{{ .Working.String }}</>{{ end }}",
+          "type": "git"
         }
       ],
-      "final_space": true,
-      "version": 3
-    }''));
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#ffdd86",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#42a9ff{{ end }}"
+          ],
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": "> ",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "version": 3
+}
+   ''));
   };
 
 
@@ -202,7 +206,7 @@
        ll = "ls -lah";
        #nixgit = "git --git-dir=$HOME/.nixos-config/ --work-tree=$HOME";
        #lazynix = "lazygit --git-dir=$HOME/.nixos-config/ --work-tree=$HOME";
-       ghostcuts = "ghostty +list-keybinds --default";
+       lg = "lazygit";
        nrs = "home-manager switch --flake $HOME/git_repos/mnt-pocket-reform-nix/.";
        man = "tldr";
        cat = "bat";
