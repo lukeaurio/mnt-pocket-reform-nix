@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixgl, ... }:
 
 {
   # Home Manager configuration for MNT Pocket Reform
@@ -15,6 +15,13 @@
 
   # Enable home-manager to manage itself
   programs.home-manager.enable = true;
+
+  #Add Graphics Libs Needed for Running Cool stuff
+  nixGL = {
+     packages = import nixgl { inherit pkgs; };
+     defaultWrapper = "mesaPrime";
+     installScripts = [ "mesaPrime" ];
+  };
 
   # Stylix configuration for system-wide theming
   stylix = {
@@ -262,6 +269,17 @@
       set -g base-index 1
       setw -g pane-base-index 1
     '';
+  };
+
+  programs.ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      #background = "000000";
+      background-opacity = "0.6";
+      cursor-style = "block";
+      #font-family = "GohuFont uni14 Nerd Font";
+    };
   };
 
   # Set environment variables

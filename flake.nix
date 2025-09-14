@@ -8,6 +8,10 @@
     flake-schemas.url = "https://flakehub.com/f/DeterminateSystems/flake-schemas/*";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,12 +25,13 @@
   };
 
   # Flake outputs that other flakes can use
-  outputs = inputs@{ self, flake-schemas, nixpkgs, home-manager, stylix, ... }:
+  outputs = { self, flake-schemas, nixpkgs, nixgl, home-manager, stylix, ... }@inputs:
     let
       # Helpers for producing system-specific outputs
       supportedSystems = [ "aarch64-linux" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit system; };
+        overlays = [ nixgl.overlay ];
         config = {
            allowUnfree = true;
            allowUnfreePredicate = _: true;
@@ -49,17 +54,11 @@
             # Main home configuration
             ./home.nix
           ];
+          extraSpecialArgs = {
+            inherit inputs;
+            nixgl = nixgl;
+          };
         };
       };
-
-      # Development environments
-      devShells = forEachSupportedSystem ({ pkgs }: {
-        default = pkgs.mkShell {
-          # Pinned packages available in the environment
-          packages = with pkgs; [
-            nixpkgs-fmt
-          ];
-        };
-      });
     };
 }
