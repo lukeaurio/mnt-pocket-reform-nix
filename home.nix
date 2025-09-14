@@ -17,11 +17,11 @@
   programs.home-manager.enable = true;
 
   #Add Graphics Libs Needed for Running Cool stuff
-  nixGL = {
-     packages = import nixgl { inherit pkgs; };
-     defaultWrapper = "mesaPrime";
-     installScripts = [ "mesaPrime" ];
-  };
+  #nixGL = {
+  #   packages = import nixgl { inherit pkgs; };
+  #   defaultWrapper = "vulkan";
+  #   installScripts = [ "vulkan" ];
+  #};
 
   # Stylix configuration for system-wide theming
   stylix = {
@@ -75,7 +75,6 @@
     screen
     lazygit
     tealdeer
-    ghostty
 
     # System monitoring
     iotop
@@ -224,26 +223,18 @@
   
 
   # Configure vim with basic settings
-  programs.vim = {
+  programs.nvf = {
     enable = true;
-    
-    extraConfig = ''
-      set number
-      set relativenumber
-      set tabstop=2
-      set shiftwidth=2
-      set expandtab
-      set autoindent
-      set smartindent
-      syntax on
-      set background=dark
-      
-      " Better search
-      set hlsearch
-      set incsearch
-      set ignorecase
-      set smartcase
-    '';
+    enableManpages = true;
+    # your settings need to go into the settings attribute set
+    # most settings are documented in the appendix
+    settings = {
+      vim.viAlias = false;
+      vim.vimAlias = true;
+      vim.lsp = {
+        enable = true;
+      };
+    };
   };
 
   # Configure tmux for terminal multiplexing
@@ -271,21 +262,10 @@
     '';
   };
 
-  programs.ghostty = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      #background = "000000";
-      background-opacity = "0.6";
-      cursor-style = "block";
-      #font-family = "GohuFont uni14 Nerd Font";
-    };
-  };
-
   # Set environment variables
   home.sessionVariables = {
-    EDITOR = "nano";
+    EDITOR = "vim";
     BROWSER = "firefox";
-    TERMINAL = "ghostty";
+    #TERMINAL = "ghostty";
   };
 }

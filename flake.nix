@@ -12,6 +12,13 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Required, nvf works best and only directly supports flakes
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +32,7 @@
   };
 
   # Flake outputs that other flakes can use
-  outputs = { self, flake-schemas, nixpkgs, nixgl, home-manager, stylix, ... }@inputs:
+  outputs = { self, flake-schemas, nixpkgs, nixgl, home-manager, nvf, stylix, ... }@inputs:
     let
       # Helpers for producing system-specific outputs
       supportedSystems = [ "aarch64-linux" ];
@@ -50,7 +57,7 @@
           modules = [
             # Enable stylix for theming
             stylix.homeModules.stylix
-
+            nvf.homeManagerModules.default
             # Main home configuration
             ./home.nix
           ];
