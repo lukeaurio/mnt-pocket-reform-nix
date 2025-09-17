@@ -219,6 +219,7 @@
      if [ "$VSCODE_INJECTION" = "1" ]; then
        export EDITOR="code --wait" # or 'code-insiders' if you're using VS Code Insiders
      fi
+     eval "$(ssh-agent -s)"
      ''; #https://mynixos.com/home-manager/option/programs.zsh.initContent
      oh-my-zsh = { # "ohMyZsh" without Home Manager
        enable = true;
