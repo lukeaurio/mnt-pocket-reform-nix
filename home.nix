@@ -35,7 +35,7 @@
         #url = "https://raw.githubusercontent.com/lukeaurio/nixos-configs/refs/heads/main/Pictures/Desktop_Backgrounds/DesertVista.jpg";
         #hash = "sha256-lZjfYxB/8qDNK97W/4Oafo+R26eImOLe6nLvWhZb6+M=";
         #Magenta Mountain
-        url = "source.mnt.re/reform/reform-tools/-/raw/main/share/backgrounds/mnt-reform-next-y2k.jpg?ref_type=heads";
+        url = "https://raw.githubusercontent.com/lukeaurio/mnt-pocket-reform-nix/refs/heads/main/mnt-reform-next-y2k.jpg";
         hash = "sha256-9wEfsMCqO8iyzWKLk9NtXw+udbjHHPchp1aDCq28Ui8=";
       };
       polarity = "dark";
@@ -216,6 +216,7 @@
        nrs = "home-manager switch --flake $HOME/git_repos/mnt-pocket-reform-nix/.";
        man = "tldr";
        cat = "bat";
+       nixclean = "nix-env --delete-generations old && nix-store --gc";
      };
      initContent = ''
      #source $HOME/shell_scripts/zsh_start.sh 
