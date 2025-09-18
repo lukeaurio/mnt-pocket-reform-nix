@@ -76,10 +76,12 @@
     tmux
     screen
     lazygit
+    lazynpm 
     tealdeer
     
     #Programming Frameworks
     hugo
+    nodePackages.nodejs
     python312
     poetry
 
