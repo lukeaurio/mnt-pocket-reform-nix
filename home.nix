@@ -77,6 +77,11 @@
     screen
     lazygit
     tealdeer
+    
+    #Programming Frameworks
+    hugo
+    python312
+    poetry
 
     # TUI
     jellyfin-tui            
@@ -126,7 +131,7 @@
     extraConfig = {
       init.defaultBranch = "main";
       pull.rebase = false;
-      core.editor = "nano";
+      core.editor = "nvim";
     };
   };
 
@@ -227,7 +232,14 @@
      ''; #https://mynixos.com/home-manager/option/programs.zsh.initContent
      oh-my-zsh = { # "ohMyZsh" without Home Manager
        enable = true;
-       plugins = [ "git" "terraform" "zoxide"  ];
+       plugins = [ "git"
+                   "dotenv"
+                   "hitchhiker"
+                   "poetry"
+                   "tailscale"
+                   "tmux"
+                   "zoxide" 
+                 ];
        theme = "robbyrussell";
      };
      history.size = 10000;
@@ -246,7 +258,7 @@
              nix.enable = true;
              python.enable = true;
              rust.enable = true;
-             enableLSP = true;
+             #enableLSP = true;
              enableTreesitter = true;
           };
           viAlias = false;
@@ -284,6 +296,12 @@
       set -g base-index 1
       setw -g pane-base-index 1
     '';
+  };
+
+  # PackageManagement
+  programs.uv = {
+    enable = true;
+    settings = {};
   };
 
   # Set environment variables
