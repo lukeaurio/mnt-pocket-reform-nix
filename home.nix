@@ -29,11 +29,14 @@
       autoEnable = true;
       image = pkgs.fetchurl {
         #Forest
-        url = "https://raw.githubusercontent.com/lukeaurio/nixos-configs/refs/heads/main/Pictures/Desktop_Backgrounds/ForestTemple.png";
-        hash = "sha256-+OiCAgVZQ1TFhmnRs47S3aXdGqED9mlmvZ36gWx+RcI=";
+        #url = "https://raw.githubusercontent.com/lukeaurio/nixos-configs/refs/heads/main/Pictures/Desktop_Backgrounds/ForestTemple.png";
+        #hash = "sha256-+OiCAgVZQ1TFhmnRs47S3aXdGqED9mlmvZ36gWx+RcI=";
         #desert
         #url = "https://raw.githubusercontent.com/lukeaurio/nixos-configs/refs/heads/main/Pictures/Desktop_Backgrounds/DesertVista.jpg";
         #hash = "sha256-lZjfYxB/8qDNK97W/4Oafo+R26eImOLe6nLvWhZb6+M=";
+        #Magenta Mountain
+        url = "source.mnt.re/reform/reform-tools/-/raw/main/share/backgrounds/mnt-reform-next-y2k.jpg?ref_type=heads";
+        hash = "sha256-9wEfsMCqO8iyzWKLk9NtXw+udbjHHPchp1aDCq28Ui8=";
       };
       polarity = "dark";
 
