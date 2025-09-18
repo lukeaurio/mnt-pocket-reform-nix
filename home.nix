@@ -40,15 +40,15 @@
       };
       polarity = "dark";
 
-      #fonts = {
-      #  monospace = {
-      #     package = pkgs.nerd-fonts.jetbrains-mono;
-      #     name = "JetBrains Nerd Font Mono";
-      #  };
-      #  serif = config.stylix.fonts.monospace;
-      #	sansSerif = config.stylix.fonts.monospace;
-      #	emoji = config.stylix.fonts.monospace;
-      #};
+      fonts = {
+        monospace = {
+           package = pkgs.nerd-fonts.hasklug;
+           name = "Hasklug Nerd Font Mono";
+        };
+        serif = config.stylix.fonts.monospace;
+      	sansSerif = config.stylix.fonts.monospace;
+      	emoji = config.stylix.fonts.monospace;
+      };
   };
 
   # Essential command line tools
@@ -236,7 +236,6 @@
        enable = true;
        plugins = [ "git"
                    "dotenv"
-                   "hitchhiker"
                    "poetry"
                    "tailscale"
                    "tmux"
@@ -260,6 +259,7 @@
              nix.enable = true;
              python.enable = true;
              rust.enable = true;
+             go.enable = true;
              #enableLSP = true;
              enableTreesitter = true;
           };
@@ -268,9 +268,27 @@
           lsp = {
              enable = true;
           };
+          startPlugins = [
+             "harpoon"
+             "nvim-notify"
+             "render-markdown-nvim"
+          ];
           statusline.lualine.enable = true;
           telescope.enable = true;
           autocomplete.nvim-cmp.enable = true;
+          assistant.copilot = {
+             enable = true;
+             cmp.enable = true;
+             setupOpts = {
+                panel = {
+                   enable = true;
+                   position = "right";
+                };
+             };
+          };
+          #visuals.tiny-devicons-auto-colors.enable = true;
+          withNodeJs = true;
+          withPython3 = true;
        }; 
     };
   };
