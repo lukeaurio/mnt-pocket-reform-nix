@@ -35,8 +35,8 @@
         #url = "https://raw.githubusercontent.com/lukeaurio/nixos-configs/refs/heads/main/Pictures/Desktop_Backgrounds/DesertVista.jpg";
         #hash = "sha256-lZjfYxB/8qDNK97W/4Oafo+R26eImOLe6nLvWhZb6+M=";
         #Magenta Mountain
-        url = "https://raw.githubusercontent.com/lukeaurio/mnt-pocket-reform-nix/refs/heads/main/mnt-reform-next-y2k.jpg";
-        hash = "sha256-9wEfsMCqO8iyzWKLk9NtXw+udbjHHPchp1aDCq28Ui8=";
+        url = "https://raw.githubusercontent.com/lukeaurio/mnt-pocket-reform-nix/refs/heads/main/PurplePagoda.png";
+        hash = "sha256-X8jg0+aS4bque6UdR4tnyXq54IZ7bhH4TUnyvY14qMk=";
       };
       polarity = "dark";
 
@@ -140,38 +140,95 @@
   programs.oh-my-posh = {
      enable = true;
      enableZshIntegration = true;
+     #Based off of this https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/M365Princess.omp.json
      settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (''
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "white": "#FFFFFF",
+    "tan": "#CC3802",
+    "teal": "#047E84",
+    "plum": "#9A348E",
+    "blush": "#DA627D",
+    "salmon": "#FCA17D",
+    "sky": "#86BBD8",
+    "teal_blue": "#33658A"
+  },
   "blocks": [
     {
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#ffdd86",
-          "style": "plain",
-          "template": "{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }} {{ end }}",
+          "type": "text",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "foreground": "p:white",
+          "background": "p:tan",
+          "template": "{{ if .Env.PNPPSHOST }} \uf8c5 {{ .Env.PNPPSHOST }} {{ end }}"
+        },
+        {
+          "type": "text",
+          "style": "powerline",
+          "foreground": "p:white",
+          "background": "p:teal",
+          "powerline_symbol": "\ue0b0",
+          "template": "{{ if .Env.PNPPSSITE }} \uf2dd {{ .Env.PNPPSSITE }}{{ end }}"
+        },
+        {
+          "type": "text",
+          "style": "diamond",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:white",
+          "background": "p:teal",
+          "template": "{{ if .Env.PNPPSSITE }}\u00A0{{ end }}"
+        }
+      ],
+      "type": "rprompt"
+    },
+    {
+      "alignment": "left",
+      "segments": [
+         {
+          "background": "p:plum",
+          "foreground": "p:white",
+          "leading_diamond": "\ue0b6",
+          "style": "diamond",
+          "template": "\uf313",
           "type": "session"
         },
         {
-          "foreground": "#42a9ff",
-          "style": "plain",
+          "background": "p:blush",
+          "foreground": "p:white",
+          "powerline_symbol": "\ue0b0",        
           "properties": {
              "style": "fish",
              "full_length_dirs": 1,
              "dir_legth": 3
           },
-          "template": "{{ .Path }} ",
+          "style": "powerline",
+          "template": " {{ .Path }} ",
           "type": "path"
         },
         {
+          "background": "p:salmon",
+          "foreground": "p:white",
+          "powerline_symbol": "\ue0b0",
           "properties": {
             "branch_icon": "",
-            "fetch_status": true
+            "fetch_status": false,
+            "fetch_upstream_icon": true
           },
-          "style": "plain",
-          "template": "git:{{ if or (.Working.Changed) (.Staging.Changed) (gt .StashCount 0) }}<#ffdd86>{{ .HEAD }}</>{{ else }}{{ .HEAD }}{{ end }}{{ if .Staging.Changed }} <#98c379>{{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }} <#d16971>{{ .Working.String }}</>{{ end }}",
+          "style": "powerline",
+          "template": " \u279c ({{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}) ",
           "type": "git"
+        },
+        {
+          "background": "p:sky",
+          "foreground": "p:white",
+          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "type": "node"
         }
       ],
       "type": "prompt"
@@ -181,21 +238,22 @@
       "newline": true,
       "segments": [
         {
-          "foreground": "#ffdd86",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#42a9ff{{ end }}"
-          ],
-          "properties": {
-            "always_enabled": true
-          },
+          "foreground": "#757575",
           "style": "plain",
-          "template": "> ",
-          "type": "status"
+          "template": "\u2514 ",
+          "type": "text"
+        },
+        {
+          "foreground": "#p:white",
+          "style": "plain",
+          "template": ">",
+          "type": "text"
         }
       ],
       "type": "prompt"
     }
   ],
+  "final_space": true,
   "version": 3
 }
    ''));
