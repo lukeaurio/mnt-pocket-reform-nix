@@ -35,8 +35,8 @@
         #url = "https://raw.githubusercontent.com/lukeaurio/nixos-configs/refs/heads/main/Pictures/Desktop_Backgrounds/DesertVista.jpg";
         #hash = "sha256-lZjfYxB/8qDNK97W/4Oafo+R26eImOLe6nLvWhZb6+M=";
         #Magenta Mountain
-        url = "https://raw.githubusercontent.com/lukeaurio/mnt-pocket-reform-nix/refs/heads/main/PurplePagoda.png";
-        hash = "sha256-X8jg0+aS4bque6UdR4tnyXq54IZ7bhH4TUnyvY14qMk=";
+        url = "https://raw.githubusercontent.com/lukeaurio/mnt-pocket-reform-nix/refs/heads/main/PurplePagodaNeo.png";
+        hash = "sha256-gkRug5jAxazC/ESz57YZN1MVUJ42Si59F7rf6DAs9gE=";
       };
       polarity = "dark";
 
@@ -45,9 +45,18 @@
            package = pkgs.nerd-fonts.hasklug;
            name = "Hasklug Nerd Font Mono";
         };
-        serif = config.stylix.fonts.monospace;
-      	sansSerif = config.stylix.fonts.monospace;
-      	emoji = config.stylix.fonts.monospace;
+        serif = {
+           package = pkgs.nerd-fonts.hasklug;
+           name = "Hasklug Nerd Font Serif";
+        };
+      	sansSerif = {
+           package = pkgs.nerd-fonts.hasklug;
+           name = "Hasklug Nerd Font Propo";
+        };
+        emoji = {
+           package = pkgs.noto-fonts-emoji;
+           name = "Noto Color Emoji";
+        };
       };
   };
 
@@ -108,8 +117,14 @@
     pciutils
   ];
 
-  # Configure git (essential for development)
-  
+  home.file = { 
+        ".local/share/org.gnome.Ptyxis/palettes/stylix.palette" = { 
+           text = ''
+           ''; 
+           executable = false; 
+        };
+  };
+
   programs.keychain = {
     enable = true;
     #agents = [ "ssh" ];
@@ -193,7 +208,7 @@
           "foreground": "p:white",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": "\uf313",
+          "template": " \uf313 ",
           "type": "session"
         },
         {
@@ -219,7 +234,7 @@
             "fetch_upstream_icon": true
           },
           "style": "powerline",
-          "template": " \u279c ({{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}) ",
+          "template": " \u279c ({{ .UpstreamIcon }} {{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}) ",
           "type": "git"
         },
         {
@@ -289,6 +304,7 @@
        export EDITOR="code --wait" # or 'code-insiders' if you're using VS Code Insiders
      fi
      eval "$(ssh-agent -s)"
+     source <(hugo completion zsh)
      ''; #https://mynixos.com/home-manager/option/programs.zsh.initContent
      oh-my-zsh = { # "ohMyZsh" without Home Manager
        enable = true;
@@ -318,6 +334,11 @@
              python.enable = true;
              rust.enable = true;
              go.enable = true;
+             lua.enable = true;
+             markdown = {
+                enable = true;
+                extensions.markview-nvim.enable = true;
+             };
              #enableLSP = true;
              enableTreesitter = true;
           };
