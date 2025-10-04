@@ -58,6 +58,13 @@
            name = "Noto Color Emoji";
         };
       };
+      targets = {
+        firefox = {
+           colorTheme.enable = true;
+           enable = true;
+           profileNames = [ "default-release" ];
+        };
+      };
   };
 
   # Essential command line tools
