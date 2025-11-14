@@ -54,8 +54,8 @@
            name = "Hasklug Nerd Font Propo";
         };
         emoji = {
-           package = pkgs.noto-fonts-emoji;
-           name = "Noto Color Emoji";
+           package = pkgs.noto-fonts-color-emoji;
+           name = "noto-fonts-color-emoji";
         };
       };
       targets = {
