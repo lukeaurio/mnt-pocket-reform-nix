@@ -10,7 +10,7 @@
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
   # incompatible changes.
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 
   # Basic user information - should be customized per user
   home.username = "willberto";
@@ -25,6 +25,8 @@
   #   defaultWrapper = "vulkan";
   #   installScripts = [ "vulkan" ];
   #};
+
+  fonts.fontconfig.enable = true;
 
   # Stylix configuration for system-wide theming
   stylix = {
