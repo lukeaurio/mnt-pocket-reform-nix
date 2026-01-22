@@ -127,6 +127,9 @@
     # Hardware specific for ARM devices
     usbutils
     pciutils
+
+    #Fonts!
+    nerd-fonts.hasklug
   ];
 
   home.file = {
@@ -347,7 +350,7 @@
           markdown.enable = true;
           rust = {
             enable = true;
-            crates.enable = true;
+            extensions.crates-nvim.enable = true;
           };
           ts.enable = true;
           lua.enable = true;
