@@ -105,6 +105,7 @@
     nodePackages.nodejs
     python312
     poetry
+    tree-sitter
 
     # TUI
     jellyfin-tui
@@ -419,7 +420,7 @@
 
         minimap = {
           minimap-vim.enable = false;
-          codewindow.enable = true;
+          codewindow.enable = false;
         };
 
         autopairs.nvim-autopairs.enable = true;
@@ -441,7 +442,7 @@
           illuminate.enable = true;
           breadcrumbs = {
             enable = true;
-            navbuddy.enable = true;
+            navbuddy.enable = false;
           };
           smartcolumn = {
             enable = true;
