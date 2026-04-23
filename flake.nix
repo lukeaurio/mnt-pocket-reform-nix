@@ -14,8 +14,8 @@
     };
 
     # Required, nvf works best and only directly supports flakes
-    nvf = {
-      url = "github:NotAShelf/nvf";
+    lazyvim = {
+      url = "github:pfassina/lazyvim-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,26 +32,35 @@
   };
 
   # Flake outputs that other flakes can use
-  outputs = { 
-        self, 
-        #flake-schemas, 
-        nixpkgs, 
-        nixgl, 
-        home-manager, 
-        nvf, 
-        stylix, ... }@inputs:
+  outputs =
+    {
+      self,
+      #flake-schemas,
+      nixpkgs,
+      nixgl,
+      home-manager,
+      nvf,
+      stylix,
+      ...
+    }@inputs:
     let
       # Helpers for producing system-specific outputs
       supportedSystems = [ "aarch64-linux" ];
-      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
-        pkgs = import nixpkgs { inherit system; };
-        overlays = [ nixgl.overlay ];
-        config = {
-           allowUnfree = true;
-           allowUnfreePredicate = _: true;
-        };
-      });
-    in {
+      forEachSupportedSystem =
+        f:
+        nixpkgs.lib.genAttrs supportedSystems (
+          system:
+          f {
+            pkgs = import nixpkgs { inherit system; };
+            overlays = [ nixgl.overlay ];
+            config = {
+              allowUnfree = true;
+              allowUnfreePredicate = _: true;
+            };
+          }
+        );
+    in
+    {
       # Schemas tell Nix about the structure of your flake's outputs
       #schemas = flake-schemas.schemas;
 
@@ -60,11 +69,16 @@
         # Default user configuration - can be customized
         "willberto" = home-manager.lib.homeManagerConfiguration {
           #inherit pkgs;
-          pkgs = import nixpkgs { system = "aarch64-linux"; };
+          pkgs = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = [
+              nixgl.overlay
+            ];
+          };
           modules = [
             # Enable stylix for theming
             stylix.homeModules.stylix
-            nvf.homeManagerModules.default
+            lazyvim.homeManagerModules.default
             # Main home configuration
             ./home.nix
           ];
