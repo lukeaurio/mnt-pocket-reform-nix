@@ -3,7 +3,8 @@
   pkgs,
   nixgl,
   ...
-}: {
+}:
+{
   # Home Manager configuration for MNT Pocket Reform
 
   # This value determines the Home Manager release that your
@@ -67,7 +68,7 @@
       firefox = {
         colorTheme.enable = true;
         enable = true;
-        profileNames = ["default-release"];
+        profileNames = [ "default-release" ];
       };
     };
   };
@@ -135,8 +136,7 @@
 
   home.file = {
     ".local/share/org.gnome.Ptyxis/palettes/stylix.palette" = {
-      text = ''
-      '';
+      text = "";
       executable = false;
     };
   };
@@ -144,7 +144,7 @@
   programs.keychain = {
     enable = true;
     #agents = [ "ssh" ];
-    keys = ["id_ed25519"];
+    keys = [ "id_ed25519" ];
     extraFlags = [
       "--quiet"
       "--ssh-allow-forwarded"
@@ -172,122 +172,124 @@
     enable = true;
     enableZshIntegration = true;
     #Based off of this https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/M365Princess.omp.json
-    settings = builtins.fromJSON (builtins.unsafeDiscardStringContext ''
-      {
-        "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-        "palette": {
-          "white": "#FFFFFF",
-          "tan": "#CC3802",
-          "teal": "#047E84",
-          "plum": "#9A348E",
-          "blush": "#DA627D",
-          "salmon": "#FCA17D",
-          "sky": "#86BBD8",
-          "teal_blue": "#33658A"
-        },
-        "blocks": [
-          {
-            "alignment": "left",
-            "segments": [
-              {
-                "type": "text",
-                "style": "diamond",
-                "leading_diamond": "\ue0b6",
-                "foreground": "p:white",
-                "background": "p:tan",
-                "template": "{{ if .Env.PNPPSHOST }} \uf8c5 {{ .Env.PNPPSHOST }} {{ end }}"
-              },
-              {
-                "type": "text",
-                "style": "powerline",
-                "foreground": "p:white",
-                "background": "p:teal",
-                "powerline_symbol": "\ue0b0",
-                "template": "{{ if .Env.PNPPSSITE }} \uf2dd {{ .Env.PNPPSSITE }}{{ end }}"
-              },
-              {
-                "type": "text",
-                "style": "diamond",
-                "trailing_diamond": "\ue0b4",
-                "foreground": "p:white",
-                "background": "p:teal",
-                "template": "{{ if .Env.PNPPSSITE }}\u00A0{{ end }}"
-              }
-            ],
-            "type": "rprompt"
+    settings = builtins.fromJSON (
+      builtins.unsafeDiscardStringContext ''
+        {
+          "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+          "palette": {
+            "white": "#FFFFFF",
+            "tan": "#CC3802",
+            "teal": "#047E84",
+            "plum": "#9A348E",
+            "blush": "#DA627D",
+            "salmon": "#FCA17D",
+            "sky": "#86BBD8",
+            "teal_blue": "#33658A"
           },
-          {
-            "alignment": "left",
-            "segments": [
-               {
-                "background": "p:plum",
-                "foreground": "p:white",
-                "leading_diamond": "\ue0b6",
-                "style": "diamond",
-                "template": " \uf313 ",
-                "type": "session"
-              },
-              {
-                "background": "p:blush",
-                "foreground": "p:white",
-                "powerline_symbol": "\ue0b0",
-                "properties": {
-                   "style": "fish",
-                   "full_length_dirs": 1,
-                   "dir_legth": 3
+          "blocks": [
+            {
+              "alignment": "left",
+              "segments": [
+                {
+                  "type": "text",
+                  "style": "diamond",
+                  "leading_diamond": "\ue0b6",
+                  "foreground": "p:white",
+                  "background": "p:tan",
+                  "template": "{{ if .Env.PNPPSHOST }} \uf8c5 {{ .Env.PNPPSHOST }} {{ end }}"
                 },
-                "style": "powerline",
-                "template": " {{ .Path }} ",
-                "type": "path"
-              },
-              {
-                "background": "p:salmon",
-                "foreground": "p:white",
-                "powerline_symbol": "\ue0b0",
-                "properties": {
-                  "branch_icon": "",
-                  "fetch_status": false,
-                  "fetch_upstream_icon": true
+                {
+                  "type": "text",
+                  "style": "powerline",
+                  "foreground": "p:white",
+                  "background": "p:teal",
+                  "powerline_symbol": "\ue0b0",
+                  "template": "{{ if .Env.PNPPSSITE }} \uf2dd {{ .Env.PNPPSSITE }}{{ end }}"
                 },
-                "style": "powerline",
-                "template": " \u279c ({{ .UpstreamIcon }} {{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}) ",
-                "type": "git"
-              },
-              {
-                "background": "p:sky",
-                "foreground": "p:white",
-                "powerline_symbol": "\ue0b0",
-                "style": "powerline",
-                "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
-                "type": "node"
-              }
-            ],
-            "type": "prompt"
-          },
-          {
-            "alignment": "left",
-            "newline": true,
-            "segments": [
-              {
-                "foreground": "#757575",
-                "style": "plain",
-                "template": "\u2514 ",
-                "type": "text"
-              },
-              {
-                "foreground": "#p:white",
-                "style": "plain",
-                "template": ">",
-                "type": "text"
-              }
-            ],
-            "type": "prompt"
-          }
-        ],
-        "final_space": true,
-        "version": 3
-      }
-    '');
+                {
+                  "type": "text",
+                  "style": "diamond",
+                  "trailing_diamond": "\ue0b4",
+                  "foreground": "p:white",
+                  "background": "p:teal",
+                  "template": "{{ if .Env.PNPPSSITE }}\u00A0{{ end }}"
+                }
+              ],
+              "type": "rprompt"
+            },
+            {
+              "alignment": "left",
+              "segments": [
+                 {
+                  "background": "p:plum",
+                  "foreground": "p:white",
+                  "leading_diamond": "\ue0b6",
+                  "style": "diamond",
+                  "template": " \uf313 ",
+                  "type": "session"
+                },
+                {
+                  "background": "p:blush",
+                  "foreground": "p:white",
+                  "powerline_symbol": "\ue0b0",
+                  "properties": {
+                     "style": "fish",
+                     "full_length_dirs": 1,
+                     "dir_legth": 3
+                  },
+                  "style": "powerline",
+                  "template": " {{ .Path }} ",
+                  "type": "path"
+                },
+                {
+                  "background": "p:salmon",
+                  "foreground": "p:white",
+                  "powerline_symbol": "\ue0b0",
+                  "properties": {
+                    "branch_icon": "",
+                    "fetch_status": false,
+                    "fetch_upstream_icon": true
+                  },
+                  "style": "powerline",
+                  "template": " \u279c ({{ .UpstreamIcon }} {{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}) ",
+                  "type": "git"
+                },
+                {
+                  "background": "p:sky",
+                  "foreground": "p:white",
+                  "powerline_symbol": "\ue0b0",
+                  "style": "powerline",
+                  "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+                  "type": "node"
+                }
+              ],
+              "type": "prompt"
+            },
+            {
+              "alignment": "left",
+              "newline": true,
+              "segments": [
+                {
+                  "foreground": "#757575",
+                  "style": "plain",
+                  "template": "\u2514 ",
+                  "type": "text"
+                },
+                {
+                  "foreground": "#p:white",
+                  "style": "plain",
+                  "template": ">",
+                  "type": "text"
+                }
+              ],
+              "type": "prompt"
+            }
+          ],
+          "final_space": true,
+          "version": 3
+        }
+      ''
+    );
   };
 
   #Configure usefull shell aliases
@@ -320,7 +322,7 @@
       fi
       eval "$(ssh-agent -s)"
       source <(hugo completion zsh)
-    ''; #https://mynixos.com/home-manager/option/programs.zsh.initContent
+    ''; # https://mynixos.com/home-manager/option/programs.zsh.initContent
     oh-my-zsh = {
       # "ohMyZsh" without Home Manager
       enable = true;
@@ -338,163 +340,42 @@
   };
 
   # Configure vim with basic settings
-  programs.nvf = {
+  programs.lazyvim = {
     enable = true;
-    enableManpages = true;
-    # Your settings need to go into the settings attribute set
-    # most settings are documented in the appendix
-    settings = {
-      vim = {
-        languages = {
-          nix.enable = true;
-          python.enable = true;
-          markdown.enable = true;
-          rust = {
-            enable = true;
-            extensions.crates-nvim.enable = true;
-          };
-          ts.enable = true;
-          lua.enable = true;
-          go.enable = true;
-          bash.enable = true;
-          #enableLSP = true;
-          enableTreesitter = true;
-          enableFormat = true;
-        };
-        viAlias = false;
-        vimAlias = true;
-        spellcheck = {
-          enable = true;
-          #programmingWordlist.enable = true;
-        };
+    pluginSource = "nixpkgs";
+    ignoreBuildNotifications = true;
+    extras = {
+      ai.copilot.enable = true;
 
-        lsp = {
-          # This must be enabled for the language modules to hook into
-          # the LSP API.
-          enable = true;
+      lang.docker.enable = true;
+      lang.go.enable = true;
+      lang.helm.enable = true;
+      lang.markdown.enable = true;
+      lang.nix.enable = true;
+      lang.python.enable = true;
+      lang.terraform.enable = true;
+      lang.yaml.enable = true;
 
-          formatOnSave = true;
-          lspkind.enable = false;
-          lightbulb.enable = true;
-          lspsaga.enable = false;
-          trouble.enable = true;
-          lspSignature.enable = false; # conflicts with blink in maximal
-          otter-nvim.enable = true;
-          nvim-docs-view.enable = true;
-        };
+      editor.fzf.enable = true;
+      editor.telescope.enable = true;
 
-        debugger = {
-          nvim-dap = {
-            enable = true;
-            ui.enable = true;
-          };
-        };
-        startPlugins = [
-          "harpoon"
-          "nvim-notify"
-          "render-markdown-nvim"
-        ];
-        filetree = {
-          neo-tree = {
-            enable = true;
-          };
-        };
-
-        tabline = {
-          nvimBufferline.enable = true;
-        };
-
-        treesitter.context.enable = true;
-
-        binds = {
-          whichKey.enable = true;
-          cheatsheet.enable = true;
-        };
-        telescope.enable = true;
-        git = {
-          enable = true;
-          gitsigns.enable = true;
-          gitsigns.codeActions.enable = false; # throws an annoying debug message
-          neogit.enable = true;
-        };
-
-        minimap = {
-          minimap-vim.enable = false;
-          codewindow.enable = false;
-        };
-
-        autopairs.nvim-autopairs.enable = true;
-        autocomplete.nvim-cmp.enable = true;
-        terminal = {
-          toggleterm = {
-            enable = true;
-            lazygit = {
-              enable = true;
-              direction = "float";
-            };
-          };
-        };
-        ui = {
-          borders.enable = true;
-          noice.enable = true;
-          colorizer.enable = true;
-          modes-nvim.enable = false;
-          illuminate.enable = true;
-          breadcrumbs = {
-            enable = true;
-            navbuddy.enable = false;
-          };
-          smartcolumn = {
-            enable = true;
-            setupOpts.custom_colorcolumn = {
-              # this is a freeform module, it's `buftype = int;` for configuring column position
-              nix = "110";
-              ruby = "120";
-              java = "130";
-              go = ["90" "130"];
-            };
-          };
-          fastaction.enable = true;
-        };
-        lazy = {
-          enable = true;
-        };
-        assistant.copilot = {
-          enable = true;
-          cmp.enable = true;
-          setupOpts = {
-            panel = {
-              enable = true;
-              position = "right";
-            };
-          };
-        };
-        visuals = {
-          nvim-scrollbar.enable = true;
-          nvim-web-devicons.enable = true;
-          nvim-cursorline.enable = true;
-          cinnamon-nvim.enable = true;
-          fidget-nvim.enable = true;
-
-          highlight-undo.enable = true;
-          indent-blankline.enable = true;
-
-          # Fun
-          cellular-automaton.enable = false;
-        };
-
-        statusline = {
-          lualine = {
-            enable = true;
-          };
-        };
-        #visuals.tiny-devicons-auto-colors.enable = true;
-        #withNodeJs = true;
-        #withPython3 = true;
-      };
+      formatting.black.enable = true;
     };
-  };
 
+    extraPackages = with pkgs; [
+      # LSP servers
+      nixd
+      pyright
+
+      # Formatters
+      black
+      alejandra
+
+      # Tools
+      ripgrep
+      fd
+    ];
+  };
   # Configure tmux for terminal multiplexing
   programs.tmux = {
     enable = true;
@@ -523,7 +404,7 @@
   # PackageManagement
   programs.uv = {
     enable = true;
-    settings = {};
+    settings = { };
   };
 
   # Set environment variables
