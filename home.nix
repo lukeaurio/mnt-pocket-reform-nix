@@ -374,6 +374,18 @@
       ripgrep
       fd
     ];
+    plugins = {
+        colorscheme = ''
+          return {
+            "folke/tokyonight.nvim",
+            opts = {
+              style = "night",
+              transparent = tree
+            },
+          }
+        '';
+
+    };
   };
   # Configure tmux for terminal multiplexing
   programs.tmux = {
