@@ -105,7 +105,7 @@
     python312
     poetry
     tree-sitter
-    deno
+    #deno
 
     # TUI
     #jellyfin-tui
@@ -313,6 +313,7 @@
       man = "tldr";
       cat = "bat";
       nixclean = "nix-env --delete-generations old && nix-store --gc";
+      reload = "source ~/.zshrc";
     };
     initContent = ''
       #source $HOME/shell_scripts/zsh_start.sh
