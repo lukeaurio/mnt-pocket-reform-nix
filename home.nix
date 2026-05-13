@@ -3,8 +3,7 @@
   pkgs,
   nixgl,
   ...
-}:
-{
+}: {
   # Home Manager configuration for MNT Pocket Reform
 
   # This value determines the Home Manager release that your
@@ -22,9 +21,9 @@
 
   #Add Graphics Libs Needed for Running Cool stuff
   #nixGL = {
-  #   packages = import nixgl { inherit pkgs; };
-  #   defaultWrapper = "vulkan";
-  #   installScripts = [ "vulkan" ];
+  #packages = import nixgl {inherit pkgs;};
+  #defaultWrapper = "vulkan";
+  #installScripts = ["vulkan"];
   #};
 
   fonts.fontconfig.enable = true;
@@ -68,7 +67,7 @@
       firefox = {
         colorTheme.enable = true;
         enable = true;
-        profileNames = [ "default-release" ];
+        profileNames = ["default-release"];
       };
     };
   };
@@ -93,8 +92,7 @@
     fastfetch
 
     # Development tools
-    git
-    neovim
+    git   
     tmux
     screen
     lazygit
@@ -103,14 +101,15 @@
 
     #Programming Frameworks
     hugo
-    nodePackages.nodejs
+    nodejs
     python312
     poetry
     tree-sitter
+    deno
 
     # TUI
-    jellyfin-tui
-    reddit-tui
+    #jellyfin-tui
+    #reddit-tui
 
     # System monitoring
     iotop
@@ -144,7 +143,7 @@
   programs.keychain = {
     enable = true;
     #agents = [ "ssh" ];
-    keys = [ "id_ed25519" ];
+    keys = ["id_ed25519"];
     extraFlags = [
       "--quiet"
       "--ssh-allow-forwarded"
@@ -348,8 +347,8 @@
       ai.copilot.enable = true;
 
       lang.docker.enable = true;
-      lang.go.enable = true;
-      lang.helm.enable = true;
+      #lang.go.enable = true;
+      #lang.helm.enable = true;
       lang.markdown.enable = true;
       lang.nix.enable = true;
       lang.python.enable = true;
@@ -364,8 +363,8 @@
 
     extraPackages = with pkgs; [
       # LSP servers
-      nixd
-      pyright
+      #nixd
+      #pyright
 
       # Formatters
       black
@@ -404,7 +403,7 @@
   # PackageManagement
   programs.uv = {
     enable = true;
-    settings = { };
+    settings = {};
   };
 
   # Set environment variables

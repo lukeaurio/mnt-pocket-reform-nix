@@ -32,61 +32,57 @@
   };
 
   # Flake outputs that other flakes can use
-  outputs =
-    {
-      self,
-      #flake-schemas,
-      nixpkgs,
-      nixgl,
-      home-manager,
-      nvf,
-      stylix,
-      ...
-    }@inputs:
-    let
-      # Helpers for producing system-specific outputs
-      supportedSystems = [ "aarch64-linux" ];
-      forEachSupportedSystem =
-        f:
-        nixpkgs.lib.genAttrs supportedSystems (
-          system:
+  outputs = {
+    self,
+    #flake-schemas,
+    nixpkgs,
+    nixgl,
+    home-manager,
+    lazyvim,
+    stylix,
+    ...
+  } @ inputs: let
+    # Helpers for producing system-specific outputs
+    supportedSystems = ["aarch64-linux"];
+    forEachSupportedSystem = f:
+      nixpkgs.lib.genAttrs supportedSystems (
+        system:
           f {
-            pkgs = import nixpkgs { inherit system; };
-            overlays = [ nixgl.overlay ];
+            pkgs = import nixpkgs {inherit system;};
+            overlays = [nixgl.overlay];
             config = {
               allowUnfree = true;
               allowUnfreePredicate = _: true;
             };
           }
-        );
-    in
-    {
-      # Schemas tell Nix about the structure of your flake's outputs
-      #schemas = flake-schemas.schemas;
+      );
+  in {
+    # Schemas tell Nix about the structure of your flake's outputs
+    #schemas = flake-schemas.schemas;
 
-      # Home Manager configuration
-      homeConfigurations = {
-        # Default user configuration - can be customized
-        "willberto" = home-manager.lib.homeManagerConfiguration {
-          #inherit pkgs;
-          pkgs = import nixpkgs {
-            system = "aarch64-linux";
-            overlays = [
-              nixgl.overlay
-            ];
-          };
-          modules = [
-            # Enable stylix for theming
-            stylix.homeModules.stylix
-            lazyvim.homeManagerModules.default
-            # Main home configuration
-            ./home.nix
+    # Home Manager configuration
+    homeConfigurations = {
+      # Default user configuration - can be customized
+      "willberto" = home-manager.lib.homeManagerConfiguration {
+        #inherit pkgs;
+        pkgs = import nixpkgs {
+          system = "aarch64-linux";
+          overlays = [
+            nixgl.overlay
           ];
-          extraSpecialArgs = {
-            inherit inputs;
-            nixgl = nixgl;
-          };
+        };
+        modules = [
+          # Enable stylix for theming
+          stylix.homeModules.stylix
+          lazyvim.homeManagerModules.default
+          # Main home configuration
+          ./home.nix
+        ];
+        extraSpecialArgs = {
+          inherit inputs;
+          nixgl = nixgl;
         };
       };
     };
+  };
 }
