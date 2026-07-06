@@ -69,11 +69,18 @@
           system = "aarch64-linux";
           overlays = [
             nixgl.overlay
-          ]; }; modules = [ # Enable stylix for theming stylix.homeModules.stylix lazyvim.homeManagerModules.default # Main home configuration
+          ]; 
+        }; 
+        modules = [ # Enable stylix for theming 
+          stylix.homeModules.stylix 
+          lazyvim.homeManagerModules.default 
+          # Main home configuration
           ./home.nix
         ];
         extraSpecialArgs = {
           inherit inputs;
+          inherit stylix;
+          inherit lazyvim;
           nixgl = nixgl;
         };
       };
