@@ -310,6 +310,7 @@
       #lazynix = "lazygit --git-dir=$HOME/.nixos-config/ --work-tree=$HOME";
       lg = "lazygit";
       nrs = "home-manager switch --flake $HOME/git_repos/mnt-pocket-reform-nix/.";
+      flakeup = "nix flake update --flake $HOME/git_repos/mnt-pocket-reform-nix/. && home-manager switch --flake $HOME/git_repos/mnt-pocket-reform-nix/.";
       man = "tldr";
       cat = "bat";
       nixclean = "nix-env --delete-generations old && nix-store --gc";
