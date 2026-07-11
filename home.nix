@@ -95,6 +95,7 @@
     git   
     tmux
     screen
+  
     lazynpm
     tealdeer
 
@@ -105,6 +106,13 @@
     poetry
     tree-sitter
     #deno
+    
+    #Devops
+    docker
+    kubectl
+    helm
+    lazydocker
+    k9s
 
     # TUI
     #jellyfin-tui
@@ -363,6 +371,7 @@
       lang.markdown.enable = true;
       lang.nix.enable = true;
       lang.python.enable = true;
+      lang.helm.enable = true;
       lang.terraform.enable = true;
       lang.yaml.enable = true;
 
