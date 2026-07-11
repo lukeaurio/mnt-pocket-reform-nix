@@ -95,7 +95,6 @@
     git   
     tmux
     screen
-    lazygit
     lazynpm
     tealdeer
 
@@ -164,6 +163,16 @@
       init.defaultBranch = "main";
       pull.rebase = false;
       core.editor = "nvim";
+    };
+  };
+
+  programs.lazygit = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      gui = {
+        skipDiscardChangeWarning = true;
+      };    
     };
   };
 
