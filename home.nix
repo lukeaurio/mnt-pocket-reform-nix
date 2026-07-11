@@ -114,8 +114,9 @@
     lazydocker
     k9s
 
+
     # TUI
-    #jellyfin-tui
+    jellyfin-tui
     #reddit-tui
 
     # System monitoring
@@ -138,6 +139,9 @@
 
     #Fonts!
     nerd-fonts.hasklug
+
+    #Sigh... AI
+    codex
   ];
 
   home.file = {
@@ -326,7 +330,10 @@
       #nixgit = "git --git-dir=$HOME/.nixos-config/ --work-tree=$HOME";
       #lazynix = "lazygit --git-dir=$HOME/.nixos-config/ --work-tree=$HOME";
       lg = "lazygit";
+      mnt-update = "sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y";
       nrs = "home-manager switch --flake $HOME/git_repos/mnt-pocket-reform-nix/.";
+      tailup = "sudo tailscale up --accept-routes=true --accept-dns=true";
+      taildown =  "sudo tailscale down";
       flakeup = "nix flake update --flake $HOME/git_repos/mnt-pocket-reform-nix/. && home-manager switch --flake $HOME/git_repos/mnt-pocket-reform-nix/.";
       man = "tldr";
       cat = "bat";
